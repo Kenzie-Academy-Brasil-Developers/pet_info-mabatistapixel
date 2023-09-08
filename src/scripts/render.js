@@ -1,6 +1,5 @@
 import { getCurrentUserInfo, getAllPosts } from "./requests.js";
 
-// Renderiza todos os posts
 export async function renderAllPosts() {
   const postSection = document.querySelector(".posts");
   postSection.innerHTML = "";
@@ -12,8 +11,11 @@ export async function renderAllPosts() {
   });
 }
 
-// Renderiza um post
-async function renderPost(post) {
+export async function renderPost(post) {
+  const currentUserImg = document.querySelector(".user__image")
+  const currentUser = await getCurrentUserInfo();
+  currentUserImg.src = currentUser.avatar;
+
   const postContainer = document.createElement("article");
   postContainer.classList.add("post");
 
@@ -39,7 +41,6 @@ async function renderPost(post) {
   return postContainer;
 }
 
-// Verifica a permissao do usuário para editar/deletar um post
 async function checkEditPermission(authorID) {
   const { id } = await getCurrentUserInfo();
 
@@ -50,9 +51,12 @@ async function checkEditPermission(authorID) {
   }
 }
 
-// Renderiza o cabeçalho de um post no feed
 async function renderPostHeader(post) {
   const userInfo = post.user;
+
+  const currentUser = await getCurrentUserInfo();
+  const uniqueName = document.querySelector(".user__uniquename")
+  uniqueName.innerHTML = `@${currentUser.username}`;
 
   const postDateInfo = handleDate(post.createdAt);
 
@@ -92,7 +96,6 @@ async function renderPostHeader(post) {
   return postHeader;
 }
 
-// Renderiza as opções de "Editar" e "Deletar" caso o usuário seja dono do post
 function renderPostActions(postID) {
   const actionsContainer = document.createElement("div");
   actionsContainer.classList.add("post__actions");
@@ -124,7 +127,6 @@ function renderPostActions(postID) {
   return actionsContainer;
 }
 
-// Lida com a data atual
 function handleDate(timeStamp) {
   const months = [
     "Janeiro",
@@ -146,4 +148,41 @@ function handleDate(timeStamp) {
   const year = date.getFullYear();
 
   return `${month} de ${year}`;
+}
+
+
+export const renderModal = async (post) => {
+  const div = document.querySelector("#myPost")
+
+  const infoHeader = document.createElement("header")
+  infoHeader.classList.add("post__header")
+
+  const img = document.createElement("img")
+  img.classList.add("post__author-image")
+  img.src = post.user.avatar
+
+
+  const name = document.createElement("h2")
+  name.classList.add("post__author-name", "text4", "bolder")
+  name.innerHTML = post.user.username
+  name.id = 'nameId';
+
+  const dateInfo = await handleDate(post.created_at)
+
+  const date = document.createElement("small")
+  date.classList.add("post__date")
+  date.innerHTML = dateInfo;
+
+  const postTitle = document.createElement("h2")
+  postTitle.classList.add('post__title', 'text1', 'bolder')
+  postTitle.innerHTML = post.title
+
+  const postContent = document.createElement("p")
+  postContent.classList.add("post__content", "text3")
+  postContent.innerHTML = post.content;
+  postContent.id = "openPost"
+
+  infoHeader.append(img, name, date)
+  div.append(infoHeader, postTitle, postContent)
+
 }

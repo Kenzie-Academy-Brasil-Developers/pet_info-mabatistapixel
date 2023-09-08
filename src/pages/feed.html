@@ -1,47 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petinfo - Feed</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../../src/styles/reset.css" />
-    <link rel="stylesheet" href="../../src/styles/globalStyles.css" />
-    <link rel="stylesheet" href="../../src/styles/feed.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petinfo - Feed</title>
 
-    <!-- SCRIPTS -->
-    <script type="module" src="../scripts/feed.js" defer></script>
-  </head>
-  <body>
-    <header class="header">
-      <div class="header__container">
-        <h2 class="title3 header__title bold">Petinfo</h2>
-        <nav class="user-nav__container">
-          <div class="user__action">
-            <button id="user__newpost" class="btn btn--brand btn--large text3">
-              Criar publicação
-            </button>
-            <img class="user__image" src="" alt="" />
-          </div>
-          <div class="user__logout hidden">
-            <h2 class="user__uniquename text3 bolder"></h2>
-            <button class="text4 logout__button">
-              <div class="logout__icon"></div>
-              Sair da conta
-            </button>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <main class="main">
-      <h1 class="feed__title text2 bolder">Feed</h1>
+  <link rel="stylesheet" href="../../src/styles/reset.css" />
+  <link rel="stylesheet" href="../../src/styles/globalStyles.css" />
+  <link rel="stylesheet" href="../../src/styles/feed.css" />
 
-      <!-- POSTS -->
-      <section class="posts">
-        <!-- Aqui serão renderizados os posts -->
-      </section>
-    </main>
-  </body>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <script type="module" src="../scripts/feed.js" defer></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__container">
+      <h2 class="title3 header__title bold">Petinfo</h2>
+      <nav class="user-nav__container">
+        <div class="user__action">
+          <button id="user__newpost" class="btn btn--brand btn--large text3">
+            Criar publicação
+          </button>
+          <img class="user__image" src="" alt="" />
+        </div>
+        <div class="user__logout hidden">
+          <h2 class="user__uniquename text3 bolder"></h2>
+          <button class="text4 logout__button">
+            <div class="logout__icon"></div>
+            Sair da conta
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="main">
+    <h1 class="feed__title text2 bolder">Feed</h1>
+
+    <section class="posts">
+    </section>
+  </main>
+  <dialog id="myModal" class="modal__post_creation">
+    <div class="modal__container">
+      <form>
+        <h1 class="modal__brief">Criando novo post</h1>
+        <h3 class="modal__title">Título do post</h3>
+        <input class="modal__input" type="text" placeholder="Digite o titulo aqui...">
+        <h3 class="modal__content">Conteúdo do post</h3>
+        <textarea id="post__content" class="post__content" name="post__content" rows="5" cols="60"
+          placeholder="Desenvolva o conteúdo do post aqui..."></textarea>
+
+      </form>
+      <button type="reset" class="modal_cancel__button">Cancelar</button>
+      <button class="modal_submit__button" type="submit">Publicar</button>
+      <button type="reset" class="modal_close__button" id="closeModalBtn">X</button>
+    </div>
+  </dialog>
+
+  <dialog id="openModal" class="modal__post_expanse">
+    <div class="modal__container" id="myPost">
+    </div>
+    <button class="modal_close__button" id="closePostBtn">X</button>
+  </dialog>
+</body>
+
 </html>
