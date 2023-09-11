@@ -1,4 +1,4 @@
-import { getCurrentUserInfo, getAllPosts } from "./requests.js";
+import { getCurrentUserInfo, getAllPosts, userRegister } from "./requests.js";
 
 export async function renderAllPosts() {
   const postSection = document.querySelector(".posts");
@@ -177,12 +177,17 @@ export const renderModal = async (post) => {
   postTitle.classList.add('post__title', 'text1', 'bolder')
   postTitle.innerHTML = post.title
 
+  const divisor = document.createElement("small");
+  divisor.innerText = " | ";
+  divisor.classList.add("post__date", "text4");
+  divisor.style.paddingRight = "1rem";
+
   const postContent = document.createElement("p")
   postContent.classList.add("post__content", "text3")
   postContent.innerHTML = post.content;
   postContent.id = "openPost"
 
-  infoHeader.append(img, name, date)
+  infoHeader.append(img, name, divisor, date)
   div.append(infoHeader, postTitle, postContent)
 
 }

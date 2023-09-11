@@ -130,3 +130,4 @@ export const getCurrentPost = async (postId) => {
 
   return currentPost
 }
+

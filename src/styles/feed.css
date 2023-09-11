@@ -246,6 +246,7 @@ button:hover {
 
 
 #myPost {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -263,12 +264,19 @@ button:hover {
   background-color: #fff;
 }
 
+#openModal {
+  width: 40.625rem;
+  height: 25rem;
+}
+
 #closePostBtn {
-  position: relative;
+  position: absolute;
   background-color: var(--gray-6);
   right: 0px;
-  left: 25.9375rem;
-  bottom: 37.625rem;
+  bottom: 22.3125rem;
+  left: 38.125rem;
+  /* left: 415px;
+  bottom: 602px; */
   border-radius: 4px;
   border: none;
 }

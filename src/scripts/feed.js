@@ -1,5 +1,5 @@
 import { renderAllPosts, renderModal } from "./render.js";
-import { handlePublication, getCurrentPost, } from "./requests.js"
+import { handlePublication, getCurrentPost } from "./requests.js"
 
 function showUserMenu() {
   const userAction = document.querySelector(".user__image");
@@ -62,24 +62,30 @@ const handleImage = async () => {
 
 }
 
-const handlePublish = () => {
+const handlePublish =  () => {
   const modal = document.querySelector("#myModal")
   const input = document.querySelector(".modal__input");
   const post = document.querySelector(".post__content");
   const publishBtn = document.querySelector(".modal_submit__button");
 
-  publishBtn.addEventListener("click", () => {
+
+  publishBtn.addEventListener("click", (event) => {
+    event.preventDefault()
     const newPost = {};
 
     newPost.title = input.value;
     newPost.content = post.value;
 
     handlePublication(newPost)
+    modal.close();
+
+    renderAllPosts()
 
     input.value = '';
     post.value = '';
-    modal.close();
+    location.reload()
   })
+
 }
 
 const handleOpenButton = async () => {
@@ -122,6 +128,8 @@ const closeModalBackdrop = () => {
     }
   }
 )}
+
+
 
 
 main()
